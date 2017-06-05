@@ -1,4 +1,5 @@
 import {Meteor} from "meteor/meteor";
+import {Tracker} from "meteor/tracker";
 
 import React from "react";
 import ReactDOM from "react-dom";
@@ -9,6 +10,9 @@ import Links from "./../imports/ui/Links";
 import NotFound from "./../imports/ui/NotFound";
 import Login from "./../imports/ui/Login";
 
+const noAuthRequiredPages = ["/","/signup"];
+const authRequiredPages = ["/links"];
+
 const routes = (
   <Router history={browserHistory}>
     <Route path="/" component={Login}/>
@@ -17,6 +21,14 @@ const routes = (
     <Route path="*" component={NotFound}/>
   </Router>
 );
+
+Tracker.autorun(()=>{
+  const isAuthenticated = !!Meteor.userId();
+  const pathname = browserHistory.getCurrentLocation().pathname;
+  const isUnauthenticatedPage = noAuthRequiredPages.includes(pathname);
+  const isAuthenticatedPage = authRequiredPages.includes(pathname);
+});
+
 Meteor.startup(()=> {
   ReactDOM.render(routes, document.getElementById("app"))
 });

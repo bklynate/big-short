@@ -1,6 +1,7 @@
 import React from "react";
 import { Link } from "react-router";
-import {Accounts} from "meteor/accounts-base"
+import { Accounts } from "meteor/accounts-base";
+
 export default class SignUp extends React.Component {
   constructor(props) {
     super(props);
@@ -26,7 +27,7 @@ export default class SignUp extends React.Component {
   render() {
     return (
       <div>
-        <p>Hello from Signup</p>
+        <h1>Sign Up</h1>
 
         {this.state.error ? <p>{this.state.error}</p> : undefined}
 
