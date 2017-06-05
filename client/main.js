@@ -27,6 +27,14 @@ Tracker.autorun(()=>{
   const pathname = browserHistory.getCurrentLocation().pathname;
   const isUnauthenticatedPage = noAuthRequiredPages.includes(pathname);
   const isAuthenticatedPage = authRequiredPages.includes(pathname);
+
+  if(isAuthenticated === true && isUnauthenticatedPage){
+    browserHistory.push("/links")
+  }
+  if(isAuthenticated === false && isAuthenticatedPage){
+    browserHistory.push("/")
+  }
+
 });
 
 Meteor.startup(()=> {
