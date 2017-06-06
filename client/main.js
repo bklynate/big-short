@@ -3,7 +3,7 @@ import {Tracker} from "meteor/tracker";
 
 import React from "react";
 import ReactDOM from "react-dom";
-import {Router, Route, browserHistory} from "react-router"
+import {Router, Route, browserHistory} from "react-router";
 
 import SignUp from "./../imports/ui/SignUp";
 import Links from "./../imports/ui/Links";
@@ -13,30 +13,40 @@ import Login from "./../imports/ui/Login";
 const noAuthRequiredPages = ["/","/signup"];
 const authRequiredPages = ["/links"];
 
+const onEnterPublicPage = () => {
+  if(Meteor.userId()) {
+    browserHistory.replace("/links");
+  }
+}
+const onEnterPrivatePage = () => {
+  if(!Meteor.userId()) {
+    browserHistory.replace("/");
+  }
+}
+
 const routes = (
   <Router history={browserHistory}>
-    <Route path="/" component={Login}/>
-    <Route path="/signup" component={SignUp}/>
-    <Route path="/links" component={Links}/>
-    <Route path="*" component={NotFound}/>
+    <Route path="/" component={Login} onEnter={onEnterPublicPage}/>
+    <Route path="/signup" component={SignUp} onEnter={onEnterPublicPage}/>
+    <Route path="/links" component={Links} onEnter={onEnterPrivatePage}/>
+    <Route path="*" component={NotFound} onEnter={onEnterPublicPage}/>
   </Router>
 );
 
-Tracker.autorun(()=>{
+Tracker.autorun(() => {
   const isAuthenticated = !!Meteor.userId();
   const pathname = browserHistory.getCurrentLocation().pathname;
   const isUnauthenticatedPage = noAuthRequiredPages.includes(pathname);
   const isAuthenticatedPage = authRequiredPages.includes(pathname);
 
-  if(isAuthenticated === true && isUnauthenticatedPage){
-    browserHistory.push("/links")
-  }
-  if(isAuthenticated === false && isAuthenticatedPage){
-    browserHistory.push("/")
+  if (isAuthenticated && isUnauthenticatedPage) {
+    browserHistory.replace("/links");
+  } else if (!isAuthenticated && isAuthenticatedPage) {
+    browserHistory.replace("/");
   }
 
 });
 
-Meteor.startup(()=> {
-  ReactDOM.render(routes, document.getElementById("app"))
+Meteor.startup(() => {
+  ReactDOM.render(routes, document.getElementById("app"));
 });
