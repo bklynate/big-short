@@ -1,7 +1,7 @@
 import React from "react";
-import {Tracker} from "meteor/tracker";
-import {Links} from "./../api/links";
-
+import { Tracker } from "meteor/tracker";
+import { Links } from "./../api/links";
+import { Meteor } from "meteor/meteor"
 
 export default class LinksList extends React.Component {
   constructor(props) {
@@ -13,7 +13,8 @@ export default class LinksList extends React.Component {
 
   componentDidMount() {
     console.log("LinkList Component Did Mount Fired.")
-    Tracker.autorun(() => {
+    this.linksTracker = Tracker.autorun(() => {
+      Meteor.subscribe("linksPub");
       const allLinks = Links.find({}).fetch();
       allLinks.forEach((links) => {
         this.setState({
@@ -23,9 +24,11 @@ export default class LinksList extends React.Component {
     });
   }
 
-  componentWillMount() {
+  componentWillUnmount() {
     console.log("LinkList is NO longer showing");
+    this.linksTracker.stop();
   }
+
   renderLinkListItems(listOfLinks) {
     if(listOfLinks.length < 0) {
       return (
@@ -41,6 +44,7 @@ export default class LinksList extends React.Component {
       })
     }
   }
+
   render() {
     const allLinks = Links.find({}).fetch();
     return (
