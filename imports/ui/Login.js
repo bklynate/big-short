@@ -25,8 +25,10 @@ export default class Login extends React.Component {
         this.setState({
           error: ""
         });
+        console.log("onSubmit(Login) has fired!")
       }
     })
+
   }
 
   render() {
