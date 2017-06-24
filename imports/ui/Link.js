@@ -5,12 +5,15 @@ import { Links } from "./../api/links";
 import LinksList from "./LinksList";
 
 export default class Link extends React.Component {
+
   onSubmit(e) {
     e.preventDefault();
+
     const url = this.refs.url.value.trim();
+    
     if (url) {
-      Links.insert({url, creatorId: Meteor.userId()})
-      this.refs.url.value = ""
+      Meteor.call("links.insert", url);
+      this.refs.url.value = "";
     }
   }
 
