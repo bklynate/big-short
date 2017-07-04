@@ -1,5 +1,5 @@
 import { Meteor } from "meteor/meteor";
-import { WebApp } from "meteor/webapp"
+import { WebApp } from "meteor/webapp";
 import "./../imports/startup/simple-schema-configuration";
 import "./../imports/api/users";
 import { Links } from "./../imports/api/links";
@@ -12,10 +12,10 @@ Meteor.startup(() => {
 
     if(link) {
       response.statusCode = 302;
-      response.setHeader("Location", link.url)
+      response.setHeader("Location", link.url);
       response.end();
     } else {
-      next()
+      next();
     }
   });
 

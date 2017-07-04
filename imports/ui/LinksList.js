@@ -1,7 +1,9 @@
 import React from "react";
 import { Tracker } from "meteor/tracker";
 import { Links } from "./../api/links";
-import { Meteor } from "meteor/meteor"
+import { Meteor } from "meteor/meteor";
+
+import LinksListItem from "./LinksListItem";
 
 export default class LinksList extends React.Component {
   constructor(props) {
@@ -27,8 +29,9 @@ export default class LinksList extends React.Component {
 
   renderLinkListItems() {
     return this.state.links.map((link) => {
+      const shortUrl = Meteor.absoluteUrl(link._id);
       return (
-        <p key={link._id}>{link.url} - {link._id}</p>
+        <LinksListItem key={link._id} shortUrl={shortUrl} {...link}/>
       )
     });
   }
