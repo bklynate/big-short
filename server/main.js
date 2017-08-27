@@ -3,10 +3,13 @@ import { WebApp } from "meteor/webapp";
 import "./../imports/startup/simple-schema-configuration";
 import "./../imports/api/users";
 import { Links } from "./../imports/api/links";
-import moment from "moment";
+// import moment from "moment";
 
 Meteor.startup(() => {
-  let momentNow = moment();
+  // let momentNow = moment();
+  // console.log(momentNow.format('MMM Do, YYYY - h:mma'))
+  // console.log(momentNow.fromNow('MMM Do, YYYY - h:mma'))
+
   // code to run on server at startup
   WebApp.connectHandlers.use((request, response, next) => {
     const _id = request.url.slice(1);

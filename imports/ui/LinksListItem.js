@@ -1,6 +1,7 @@
 import React from "react";
 import Clipboard from "clipboard";
 import { Meteor } from "meteor/meteor";
+import moment from "moment";
 
 export default class LinksListItem extends React.Component {
   constructor(props) {
@@ -28,19 +29,32 @@ export default class LinksListItem extends React.Component {
     })
   }
 
+  renderStats() {
+    const visitMessage = this.props.visitedCount === 1 ? "visit" : "visits";
+    let visitedMessage = null;
+    let momentNow = moment(this.props.lastVisitedAt);
+
+    if(typeof this.props.lastVisitedAt === "number") {
+
+      visitedMessage = `(visited ${ momentNow.fromNow() })`;
+    }
+    return <p>{this.props.visitedCount} {visitMessage} {visitedMessage}</p>
+
+  }
+
   componentWillUnMount() {
     this.clipboard.destory();
   }
 
   render() {
     console.log(this.props.visible)
+
     return (
       <div>
         <p>{this.props.url}</p>
         <a href={this.props.shortUrl} target="_blank">{this.props.shortUrl}</a>
         <p>{this.props.visible.toString()}</p>
-        <p>Last Visited: {this.props.lastVisitedAt}</p>
-        <p>Visited: {this.props.visitedCount}</p>
+        <p>Last Visited: {this.renderStats()}</p>
         <button ref="copy" data-clipboard-text={this.props.shortUrl}>{this.state.copied ? "Copied" : "Copy" }</button>
         <button onClick={() => {
           Meteor.call("links.setVisibility", this.props._id, !this.props.visible)}}>{this.props.visible ? "Hide" : "Unhide"}
