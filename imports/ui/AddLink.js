@@ -15,7 +15,7 @@ export default class AddLink extends React.Component {
 
     if (url) {
       Meteor.call("links.insert", url, (error, response) => {
-        if(!err) {
+        if(!error) {
           this.setState({ url: "" });
         }
       });
@@ -34,6 +34,7 @@ export default class AddLink extends React.Component {
           <input
             value={this.state.url}
             type="text"
+            ref="url"
             placeholder="Add a url here"
             onChange={this.onChange.bind(this)}/>
           <button>Add Link</button>

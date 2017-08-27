@@ -30,7 +30,9 @@ Meteor.methods({
       _id: shortId.generate(),
       url,
       creatorId: this.userId,
-      visible: true
+      visible: true,
+      visitedCount: 0,
+      lastVisitedAt: null
     });
   },
 
