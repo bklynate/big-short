@@ -3,8 +3,10 @@ import { WebApp } from "meteor/webapp";
 import "./../imports/startup/simple-schema-configuration";
 import "./../imports/api/users";
 import { Links } from "./../imports/api/links";
+import moment from "moment";
 
 Meteor.startup(() => {
+  let momentNow = moment();
   // code to run on server at startup
   WebApp.connectHandlers.use((request, response, next) => {
     const _id = request.url.slice(1);
