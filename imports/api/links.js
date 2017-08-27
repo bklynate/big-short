@@ -36,7 +36,7 @@ Meteor.methods({
     });
   },
 
-  "links.setVisibility"(_id, visible){
+  "links.setVisibility"(_id, visible) {
     if (!this.userId) {
       throw new Meteor.Error("not-authorized", "You are not authorized!")
     }
@@ -56,6 +56,24 @@ Meteor.methods({
       creatorId: this.userId
     }, {
       $set: { visible }
+    });
+  },
+
+  "links.trackVisit"(_id) {
+    new SimpleSchema({
+      _id: {
+        type: String,
+        min: 1
+      }
+    }).validate({ _id})
+
+    Links.update({ _id }, {
+      $set: {
+        lastVisitedAt: new Date().getTime()
+      },
+      $inc: {
+        visitedCount: 1
+      }
     });
   }
 });
