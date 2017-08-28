@@ -11,3 +11,22 @@ body {
   font-size: 1.6rem;
   font-family: Helvetica, Arial, sans-serif;
 }
+
+h1 {
+  font-weight: 300;
+  margin-bottom: $space;
+}
+
+a {
+  color: $baseLinkColor;
+}
+
+input[type=text],
+input[type=email],
+input[type=password] {
+  font-size: $base-font-size;
+  margin-bottom: $space;
+  padding: .8rem;
+  border: 1px solid #ddd;
+
+}
