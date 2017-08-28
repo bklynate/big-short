@@ -28,7 +28,6 @@ export default class Login extends React.Component {
         console.log("onSubmit(Login) has fired!")
       }
     })
-
   }
 
   render() {
