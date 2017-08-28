@@ -1,6 +1,7 @@
 * {
   padding: 0px;
   margin: 0;
+  box-sizing: border-box;
 }
 
 html {
@@ -32,5 +33,5 @@ input[type=password] {
   margin-bottom: $space;
   padding: .8rem;
   border: 1px solid #ddd;
-
+  text-align: center;
 }

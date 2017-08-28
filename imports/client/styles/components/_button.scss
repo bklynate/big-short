@@ -3,7 +3,21 @@
   border: none;
   color: white;
   cursor: pointer;
+  font-size: $base-font-size;
+  margin-bottom: $space;
   padding: 1rem;
   text-transform: uppercase;
-  font-size: $base-font-size;
+  line-height: 1.2;
+}
+
+.button--link {
+  display: inline-block;
+  text-decoration: none;
+}
+
+.button--pill {
+  background-color: transparent;
+  border: 1px solid $button-pill-color;
+  color: $button-pill-color;
+  padding: .3rem .8rem;
 }

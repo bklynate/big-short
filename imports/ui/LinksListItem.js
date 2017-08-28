@@ -37,8 +37,7 @@ export default class LinksListItem extends React.Component {
     if(typeof this.props.lastVisitedAt === "number") {
       visitedMessage = `(visited ${ momentNow.fromNow() })`;
     }
-    return <p>{this.props.visitedCount} {visitMessage} {visitedMessage}</p>
-
+    return <p>{this.props.visitedCount} {visitMessage} {visitedMessage}</p>  
   }
 
   componentWillUnMount() {
@@ -51,11 +50,12 @@ export default class LinksListItem extends React.Component {
     return (
       <div>
         <p>{this.props.url}</p>
-        <a href={this.props.shortUrl} target="_blank">{this.props.shortUrl}</a>
+        <p>{this.props.shortUrl}</p>
         <p>{this.props.visible.toString()}</p>
         {this.renderStats()}
-        <button ref="copy" data-clipboard-text={this.props.shortUrl}>{this.state.copied ? "Copied" : "Copy"}</button>
-        <button onClick={() => {
+        <a className="button button--pill button--link" href={this.props.shortUrl} target="_blank">Visit</a>
+        <button className="button button--pill" ref="copy" data-clipboard-text={this.props.shortUrl}>{this.state.copied ? "Copied" : "Copy"}</button>
+        <button className="button button--pill" onClick={() => {
           Meteor.call("links.setVisibility", this.props._id, !this.props.visible)}}>{this.props.visible ? "Hide" : "Unhide"}
         </button>
       </div>
