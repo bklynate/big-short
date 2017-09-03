@@ -37,7 +37,7 @@ export default class LinksListItem extends React.Component {
     if(typeof this.props.lastVisitedAt === "number") {
       visitedMessage = `(visited ${ momentNow.fromNow() })`;
     }
-    return <p>{this.props.visitedCount} {visitMessage} {visitedMessage}</p>  
+    return <p className="item__message">{this.props.visitedCount} {visitMessage} {visitedMessage}</p>
   }
 
   componentWillUnMount() {
@@ -48,10 +48,9 @@ export default class LinksListItem extends React.Component {
     console.log(this.props.visible)
 
     return (
-      <div>
-        <p>{this.props.url}</p>
-        <p>{this.props.shortUrl}</p>
-        <p>{this.props.visible.toString()}</p>
+      <div className="item">
+        <h2>{this.props.url}</h2>
+        <p className="item__message">{this.props.shortUrl}</p>
         {this.renderStats()}
         <a className="button button--pill button--link" href={this.props.shortUrl} target="_blank">Visit</a>
         <button className="button button--pill" ref="copy" data-clipboard-text={this.props.shortUrl}>{this.state.copied ? "Copied" : "Copy"}</button>

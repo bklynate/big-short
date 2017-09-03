@@ -1,6 +1,7 @@
 // Colors
 $gray: #dddddd;
 $button-pill-color: #5b4681;
+$light-gray: #f9f9f9;
 
 // Font Size
 $base-font-size: 1.4rem;
@@ -16,3 +17,7 @@ $input-border: #ddd;
 $boxed-view-overlay-bg: $gray;
 $boxed-view-bg: #fff;
 $baseLinkColor: #000;
+
+//item
+$item-bg: $light-gray;
+$item-border: darken($item-bg, 8%);
