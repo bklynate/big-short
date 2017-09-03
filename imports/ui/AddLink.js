@@ -55,7 +55,9 @@ export default class AddLink extends React.Component {
               placeholder="Add a url here"
               onChange={this.onChange.bind(this)}/>
             <button className="button">Add Link</button>
-            <button className="button button--cancel" onClick={this.handleModalClose.bind(this)}>Cancel</button>
+            {/* We add type=button to the cancel button to stop it from */}
+            {/* submitting the form as it is the final button */}
+            <button type="button" className="button button--cancel" onClick={this.handleModalClose.bind(this)}>Cancel</button>
           </form>
         </Modal>
         <button className="button" onClick={() => {this.setState({modalOpen: true})}}>Add Link+</button>

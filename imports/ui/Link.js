@@ -9,9 +9,11 @@ export default () => {
   return (
    <div>
      <PrivateHeader title="Big Shorter"/>
-     <ListFilter/>
-     <AddLink/>
-     <LinksList/>
+      <div className="page-content">
+        <ListFilter/>
+        <AddLink/>
+        <LinksList/>
+      </div>
    </div>
   )
 }

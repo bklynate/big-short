@@ -23,5 +23,14 @@
 }
 
 .button--cancel {
-  
+  background-color: #f9f9f9;
+  border: 1px solid #dddddd;
+  color: #777777;
+}
+
+.button--logout {
+  text-decoration: underline;
+  font-variant-caps: small-caps;
+  text-transform: none;
+  font-weight: 300;
 }
